@@ -1,2 +1,0 @@
-const e=document.querySelector(".gallery"),a=galleryItems.map((e=>` <li><a class = "gallery__item" href = "${e.original}">\n<img class = "gallery__image" alt = "${e.description}" src = "${e.preview}"></a></li>`));e.insertAdjacentHTML("afterbegin",a.join(""));new SimpleLightbox(".gallery a",{showCounter:!0,captions:!0,captionsData:"alt",captionDelay:250});
-//# sourceMappingURL=index.ff00e7cd.js.map

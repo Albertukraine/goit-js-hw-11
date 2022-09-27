@@ -1,2 +1,0 @@
-!function(){var a=document.querySelector(".gallery"),e=galleryItems.map((function(a){return' <li><a class = "gallery__item" href = "'.concat(a.original,'">\n<img class = "gallery__image" alt = "').concat(a.description,'" src = "').concat(a.preview,'"></a></li>')}));a.insertAdjacentHTML("afterbegin",e.join(""));new SimpleLightbox(".gallery a",{showCounter:!0,captions:!0,captionsData:"alt",captionDelay:250})}();
-//# sourceMappingURL=index.a38f48ba.js.map
