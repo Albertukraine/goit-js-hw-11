@@ -47,6 +47,14 @@
   transition: transform var(--animation-duration) var(--timing-function);
 }
 
+.load-more-btn {
+  display: flex;
+  align-items: center;
+  margin-left: 300px;
+  margin-top: 20px;
+  margin-bottom: 50px;
+}
+
 .gallery__image {
   height: 100%;
   width: 100%;

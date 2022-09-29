@@ -8,12 +8,13 @@ const refs = {
   searchBtnEl: document.querySelector('.submit-btn'),
   galleryEl: document.querySelector('.gallery'),
   inputEl: document.querySelector('input'),
+  loadMoreBtnEl: document.querySelector('.load-more-btn'),
 };
 
 let queryWord = '';
 let pageNumber = 1;
 
-async function getImage(word, pageNumber) {
+async function getImageData(word, pageNumber) {
   try {
     const response = await axios.get(
       `https://pixabay.com/api/?&pretty=true&page=${pageNumber}`,
@@ -63,7 +64,7 @@ function renderHTML(array) {
     </div>
   </div>`;
   });
-  refs.galleryEl.insertAdjacentHTML('afterbegin', imagesMarkup.join(''));
+  refs.galleryEl.insertAdjacentHTML('beforeend', imagesMarkup.join(''));
   callLightbox();
   //  console.log(imagesMarkup);
 }
@@ -71,7 +72,7 @@ function renderHTML(array) {
 async function onSubmit(event) {
   event.preventDefault();
   getWord();
-  const linksArray = await getImage(queryWord, pageNumber);
+  const linksArray = await getImageData(queryWord, pageNumber);
   renderHTML(linksArray);
   }
 
@@ -96,10 +97,13 @@ function clearHTML () {
 }
 
 
-
-function addMoreButton() {};
+async function onLoadMore() {
+  pageNumber +=1;
+  const linksArray = await getImageData(queryWord, pageNumber);
+  renderHTML(linksArray);};
 
 refs.inputEl.addEventListener('input', clearHTML);
 refs.formEl.addEventListener('submit', onSubmit);
+refs.loadMoreBtnEl.addEventListener('click', onLoadMore);
 
 
