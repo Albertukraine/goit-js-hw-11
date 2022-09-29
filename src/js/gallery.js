@@ -1,7 +1,6 @@
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-import debounce from 'lodash.debounce';
 import axios from 'axios';
 
 const refs = {
@@ -12,6 +11,7 @@ const refs = {
 };
 
 let queryWord = '';
+let pageNumber = 1;
 
 async function getImage(word, pageNumber) {
   try {
@@ -42,7 +42,7 @@ async function getImage(word, pageNumber) {
 function renderHTML(array) {
   const imagesMarkup = array.map(image => {
     return ` <div class="photo-card">
-    <img src="${image.webformatURL}" alt = "${image.tags}" loading="lazy" />
+    <a href="${image.largeImageURL}"><img src="${image.webformatURL}" alt = "${image.tags}" loading="lazy" /></a>
     <div class="info">
       <p class="info-item">
         <b>Likes</b>
@@ -68,13 +68,13 @@ function renderHTML(array) {
   //  console.log(imagesMarkup);
 }
 
-function onSubmit(event) {
+async function onSubmit(event) {
   event.preventDefault();
   getWord();
-  getImage(queryWord, 1).then(linksArray => {
-    renderHTML(linksArray);
-  });
-}
+  const linksArray = await getImage(queryWord, pageNumber);
+  renderHTML(linksArray);
+  }
+
 
 function getWord(evt) {
   queryWord = refs.inputEl.value.trim();
@@ -88,10 +88,18 @@ function callLightbox() {
     captions: true,
     captionsData: 'alt',
     captionDelay: 250,
-  });
+  }); 
+}
+
+function clearHTML () {
+  refs.galleryEl.innerHTML = ' '
 }
 
 
+
+function addMoreButton() {};
+
+refs.inputEl.addEventListener('input', clearHTML);
 refs.formEl.addEventListener('submit', onSubmit);
 
 

@@ -3,6 +3,16 @@
   --animation-duration: 250ms;
 }
 
+.search-form {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.submit-btn {
+  margin-left: 10px;
+}
+
 .gallery {
   list-style: none;
   display: grid;
@@ -32,8 +42,9 @@
   align-items: center;
 }
 
-.gallery__image:hover {
+.photo-card:hover {
   transform: scale(1.03);
+  transition: transform var(--animation-duration) var(--timing-function);
 }
 
 .gallery__image {
