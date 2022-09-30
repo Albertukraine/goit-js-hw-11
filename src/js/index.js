@@ -53,7 +53,7 @@ async function getImageData(word, pageNumber) {
 async function onLoadMore() {
   pageNumber += 1;
   const linksArray = await getImageData(queryWord, pageNumber);
-  if (linksArray < 1) {
+  if (linksArray.length < 40) {
     hideButton();
     Notify.info("We're sorry, but you've reached the end of search results.");
   }
@@ -67,7 +67,7 @@ async function onSubmit(event) {
   const linksArray = await getImageData(queryWord, pageNumber);
   await renderHTML(linksArray);
   callLightbox();
-  if (linksArray.length > 0) {
+  if (linksArray.length > 39) {
     showButton();
   }
 }
