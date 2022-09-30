@@ -1,6 +1,6 @@
 :root {
   --timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  --animation-duration: 250ms;
+  --animation-duration: 1000ms;
 }
 
 .search-form {
@@ -54,10 +54,7 @@
   padding-top: 40px;
   padding-bottom: 40px;
 }
-.load-more-btn {
- 
-  
-}
+
 
 .is-hidden {
   visibility: hidden;
@@ -70,12 +67,4 @@
   transition: transform var(--animation-duration) var(--timing-function);
 }
 
-.gallery__link {
-  display: block;
-  text-decoration: none;
-  height: 100%;
-}
 
-.gallery__link:hover {
-  cursor: zoom-in;
-}
