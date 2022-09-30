@@ -39,6 +39,10 @@ async function getImageData(word, pageNumber) {
   }
 }
 
+function showButton () {
+  refs.loadMoreBtnEl.classList.remove('is-hidden');
+}
+
 
 function renderHTML(array) {
   const imagesMarkup = array.map(image => {
@@ -74,6 +78,7 @@ async function onSubmit(event) {
   getWord();
   const linksArray = await getImageData(queryWord, pageNumber);
   renderHTML(linksArray);
+  showButton();
   }
 
 

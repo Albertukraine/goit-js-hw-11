@@ -47,12 +47,20 @@
   transition: transform var(--animation-duration) var(--timing-function);
 }
 
-.load-more-btn {
+.bottom-container {
   display: flex;
   align-items: center;
-  margin-left: 300px;
-  margin-top: 20px;
-  margin-bottom: 50px;
+  justify-content: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+.load-more-btn {
+ 
+  
+}
+
+.is-hidden {
+  visibility: hidden;
 }
 
 .gallery__image {
