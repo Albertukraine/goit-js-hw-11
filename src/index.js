@@ -1,3 +1,5 @@
+
+// import { renderHTML } from './js/renderHTML';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
@@ -18,6 +20,36 @@ let totalHitsCount = '';
 refs.inputEl.addEventListener('input', clearHTML);
 refs.formEl.addEventListener('submit', onSubmit);
 refs.loadMoreBtnEl.addEventListener('click', onLoadMore);
+
+
+export function renderHTML(array) {
+  const imagesMarkup = array.map(image => {
+    return ` <div class="photo-card">
+    <a href="${image.largeImageURL}"><img src="${image.webformatURL}" alt = "${image.tags}" loading="lazy" /></a>
+    <div class="info">
+      <p class="info-item">
+        <b>Likes</b>
+        ${image.likes}
+      </p>
+      <p class="info-item">
+        <b>Views</b>
+        ${image.views}
+      </p>
+      <p class="info-item">
+      <b>Comments</b>
+      ${image.comments}
+      </p>
+      <p class="info-item">
+        <b>Downloads</b>
+        ${image.downloads}
+      </p>
+    </div>
+  </div>`;
+  });
+  refs.galleryEl.insertAdjacentHTML('beforeend', imagesMarkup.join(''));
+  refs.searchBtnEl.disabled = true;
+}
+
 
 async function getImageData(word, pageNumber) {
   try {
@@ -84,33 +116,7 @@ function hideButton() {
   refs.loadMoreBtnEl.classList.add('is-hidden');
 }
 
-function renderHTML(array) {
-  const imagesMarkup = array.map(image => {
-    return ` <div class="photo-card">
-    <a href="${image.largeImageURL}"><img src="${image.webformatURL}" alt = "${image.tags}" loading="lazy" /></a>
-    <div class="info">
-      <p class="info-item">
-        <b>Likes</b>
-        ${image.likes}
-      </p>
-      <p class="info-item">
-        <b>Views</b>
-        ${image.views}
-      </p>
-      <p class="info-item">
-      <b>Comments</b>
-      ${image.comments}
-      </p>
-      <p class="info-item">
-        <b>Downloads</b>
-        ${image.downloads}
-      </p>
-    </div>
-  </div>`;
-  });
-  refs.galleryEl.insertAdjacentHTML('beforeend', imagesMarkup.join(''));
-  refs.searchBtnEl.disabled = true;
-}
+
 
 function getWord(evt) {
   queryWord = refs.inputEl.value.trim();
