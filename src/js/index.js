@@ -67,6 +67,7 @@ async function onSubmit(event) {
   const linksArray = await getImageData(queryWord, pageNumber);
   await renderHTML(linksArray);
   callLightbox();
+  pageNumber = 1;
   if (linksArray.length > 39) {
     showButton();
   }
@@ -105,6 +106,7 @@ function renderHTML(array) {
   </div>`;
   });
   refs.galleryEl.insertAdjacentHTML('beforeend', imagesMarkup.join(''));
+  refs.searchBtnEl.disabled = true;
 }
 
 function getWord(evt) {
@@ -126,4 +128,5 @@ function clearHTML() {
   refs.galleryEl.innerHTML = ' ';
   pageNumber = 1;
   hideButton();
+  refs.searchBtnEl.disabled = false;
 }
