@@ -19,7 +19,6 @@ export async function getImageData(word, pageNumber) {
     );
     const linksArray = response.data.hits;
     totalHitsCount = response.data.totalHits;
-    console.log("totalHitsCount",totalHitsCount);
     if (!linksArray.length) {
       Notify.failure(
         'Sorry, there are no images matching your search query. Please try again.'

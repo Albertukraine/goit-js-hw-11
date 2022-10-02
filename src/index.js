@@ -24,7 +24,7 @@ refs.loadMoreBtnEl.addEventListener('click', onLoadMore);
 
 async function onLoadMore() {
   pageNumber += 1;
-  const linksArray = await getImageData(getWord(refs), pageNumber);
+  const {linksArray} = await getImageData(getWord(refs), pageNumber);
   if (linksArray.length < 40) {
     hideButton(refs);
     Notify.info("We're sorry, but you've reached the end of search results.");
@@ -38,7 +38,6 @@ async function onSubmit(event) {
   getWord(refs);
   const {linksArray, totalHitsCount} = await getImageData(getWord(refs), pageNumber);
   if (linksArray.length) {Notify.info(`Hooray! We found ${totalHitsCount} images.`)};
-  console.log(totalHitsCount);
   renderHTML(linksArray, refs);
   callLightbox();
   pageNumber = 1;
