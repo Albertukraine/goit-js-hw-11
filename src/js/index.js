@@ -13,6 +13,7 @@ const refs = {
 
 let queryWord = '';
 let pageNumber = 1;
+let totalHitsCount = '';
 
 refs.inputEl.addEventListener('input', clearHTML);
 refs.formEl.addEventListener('submit', onSubmit);
@@ -35,9 +36,10 @@ async function getImageData(word, pageNumber) {
     );
     // console.log(response.data.hits);
     const linksArray = response.data.hits;
-    if (linksArray.length > 0) {
-      Notify.info(`Hooray! We found ${response.data.totalHits} images.`);
-    }
+    totalHitsCount = response.data.totalHits;
+    // if (linksArray.length > 0) {
+    //   Notify.info(`Hooray! We found ${response.data.totalHits} images.`);
+    // }
     if (linksArray.length === 0) {
       Notify.failure(
         'Sorry, there are no images matching your search query. Please try again.'
@@ -65,6 +67,7 @@ async function onSubmit(event) {
   event.preventDefault();
   getWord();
   const linksArray = await getImageData(queryWord, pageNumber);
+  Notify.info(`Hooray! We found ${totalHitsCount} images.`);
   await renderHTML(linksArray);
   callLightbox();
   pageNumber = 1;
